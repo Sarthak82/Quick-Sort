@@ -1,0 +1,33 @@
+def partition(arr,left,right):
+    i=left #starting
+    j= right-1 #ending
+    pivot= arr[right] #last element at right
+
+    #loop for checking values of i and j
+    while i<j: 
+        while i<right and arr[i]<pivot:
+            i+=1
+        while j>left and arr[j]>=pivot:
+            j-=1
+
+        if i<j:
+            arr[i],arr[j]=arr[j],arr[i]
+
+    #if i>j
+    if arr[i]>pivot:
+        arr[i],arr[right]=arr[right],arr[i]
+    # need i to call quicksort
+    return i
+            
+
+def quickSort(arr,left,right):
+    if left<right:
+        partition_pos=partition(arr,left,right)
+        quickSort(arr,left,partition_pos-1) # element less than pivot element
+        quickSort(arr,partition_pos+1,right)# element greater than pivot element
+    return arr
+
+nums=[2,89,5,64,7,5,3,4,9,5]
+a=quickSort(nums,0,len(nums)-1)
+print(a)
+    
